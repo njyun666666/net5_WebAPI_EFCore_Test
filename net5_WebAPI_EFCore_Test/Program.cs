@@ -18,9 +18,12 @@ namespace net5_WebAPI_EFCore_Test
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
-				.ConfigureWebHostDefaults(webBuilder =>
-				{
-					webBuilder.UseStartup<Startup>();
-				});
+			.ConfigureAppConfiguration((webHostBuilder, configurationBinder) => {
+				configurationBinder.AddJsonFile("appsettings.json", optional: true);
+			})
+			.ConfigureWebHostDefaults(webBuilder =>
+			{
+				webBuilder.UseStartup<Startup>();
+			});
 	}
 }
